@@ -12,21 +12,21 @@ def enabled():
 
 
 def speak(message):
-	request = Request(str(CAMPFIRE_URL), str(CAMPFIRE_TOKEN))
-	campfire = Campfire(request)
-	room = campfire.room(str(CAMPFIRE_ROOM))
-	room.speak(unicode(message))
+    request = Request(str(CAMPFIRE_URL), str(CAMPFIRE_TOKEN))
+    campfire = Campfire(request)
+    room = campfire.room(str(CAMPFIRE_ROOM))
+    room.speak(unicode(message))
 
 
 def full_app_url(url):
-	return APP_URL + url
+    return APP_URL + url
 
 
 def question_posted(action, new):
     if not enabled():
         return
-	question = action.node
-	speak(_('New question: %(headline)s - %(url)s' % {
+    question = action.node
+    speak(_('New question: %(headline)s - %(url)s' % {
             'headline': question.headline,
             'url': full_app_url(question.get_absolute_url())
             }))
@@ -35,10 +35,10 @@ def question_posted(action, new):
 def answer_posted(action, new):
     if not enabled():
         return
-	answer = action.node
-	question = answer.question
-	speak(_('New answer posted for question: %(headline)s - %(url)s' % {
-		'headline': question.headline,
+    answer = action.node
+    question = answer.question
+    speak(_('New answer posted for question: %(headline)s - %(url)s' % {
+        'headline': question.headline,
         'url': full_app_url(question.get_absolute_url())
         }))
 
